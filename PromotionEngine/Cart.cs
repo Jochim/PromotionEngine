@@ -19,5 +19,11 @@ namespace PromotionEngine
         {
             return new(_skus);
         }
+
+        public void ClearCart()
+        {
+            _skus = new();
+        }
+
     }
 }
