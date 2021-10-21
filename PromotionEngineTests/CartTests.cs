@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace PromotionEngineTests
@@ -6,9 +6,12 @@ namespace PromotionEngineTests
     public class CartTests
     {
         [Fact]
-        public void Test1()
+        public void CanAddItemsToCart()
         {
-
+            var cart = new Cart();
+            var testItems = new List<string> { "A", "B", "C" };
+            cart.AddItems(testItems);
+            Assert.Equal(cart.GetItems(), testItems);
         }
     }
 }
