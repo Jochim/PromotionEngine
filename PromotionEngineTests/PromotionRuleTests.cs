@@ -8,18 +8,23 @@ namespace PromotionEngineTests
         [Fact]
         public void RuleIsMatchIsTrue()
         {
-            var promotionRule = new PromotionRule((skus)=> true);
+            var promotionRule = new PromotionRule((skus)=> true, null, null);
             Assert.True(promotionRule.IsMatch(new()));
         }
 
         [Fact]
         public void RuleIsMatchIsFalse()
         {
-            var promotionRule = new PromotionRule((skus) => false);
+            var promotionRule = new PromotionRule((skus) => false, null, null);
             Assert.False(promotionRule.IsMatch(new()));
         }
 
-        
+        [Fact]
+        public void RuleCalculatesExpectedDiscount()
+        {
+            var promotionRule = new PromotionRule((skus) => true, (skus, unitprice) => 10, null);
+            Assert.Equal(10, promotionRule.CalculateDiscount(null));
+        }
 
 
     }
