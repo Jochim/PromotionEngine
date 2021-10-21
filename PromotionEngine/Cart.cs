@@ -10,10 +10,20 @@ namespace PromotionEngine
     {
         private List<string> _skus = new();
         private readonly Dictionary<string, decimal> _unitPrices = new();
+        private readonly IPromotionEngine _engine;
 
-        public decimal Total => _skus.Sum(sku => _unitPrices[sku]);
+        public decimal Total => SubTotal - Discount;
+        public decimal SubTotal => _skus.Sum(sku => _unitPrices[sku]);
+        public decimal Discount { get; private set; }
+
+        // We can have a cart without having any promotions
+        public Cart(Dictionary<string, decimal> unitPrices) => _unitPrices = unitPrices;
         
-        public Cart(Dictionary<string, decimal> unitPrices) => _unitPrices = unitPrices;         
+        public Cart(Dictionary<string, decimal> unitPrices, IPromotionEngine engine)
+        {
+            _unitPrices = unitPrices;
+            _engine = engine;
+        }
 
         public void AddItems(List<string> skus)
         {
@@ -28,6 +38,11 @@ namespace PromotionEngine
         public void ClearCart()
         {
             _skus = new();
+        }
+
+        public void ApplyPromotions()
+        {
+            Discount = _engine?.CalculateDiscount(_skus) ?? 0;
         }
 
     }
