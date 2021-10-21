@@ -2,8 +2,9 @@
 
 namespace PromotionEngine
 {
-        public interface IPromotionRule
-        {
-            bool IsMatch(List<string> skus);            
-        }  
+    public interface IPromotionRule
+    {
+        public bool IsMatch(List<string> skus);
+        public decimal CalculateDiscount(List<string> skus);       
+    }  
 }
