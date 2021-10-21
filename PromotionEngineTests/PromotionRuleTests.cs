@@ -46,7 +46,7 @@ namespace PromotionEngineTests
             var testSkus = new List<string> { "A", "A", "A", "B", "C" };
             var rule = PromotionEngineTestData.promotionRules["AAA"];
 
-            var expectedDiscount = 130;
+            var expectedDiscount = 20;
             var discount = rule.CalculateDiscount(testSkus);
             Assert.Equal(expectedDiscount, discount);
         }
@@ -57,7 +57,7 @@ namespace PromotionEngineTests
             var testSkus = new List<string> { "A", "A", "A", "A", "A", "A", "B", "C" };
             var rule = PromotionEngineTestData.promotionRules["AAA"];
 
-            var expectedDiscount = 260;
+            var expectedDiscount = 40;
             var discount = rule.CalculateDiscount(testSkus);
             Assert.Equal(expectedDiscount, discount);
         }      
