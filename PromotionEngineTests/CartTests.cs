@@ -61,6 +61,26 @@ namespace PromotionEngineTests
             var expectedTotal = PromotionEngineTestData.unitPrices["A"] + PromotionEngineTestData.unitPrices["B"] + PromotionEngineTestData.unitPrices["C"];
             Assert.Equal(expectedTotal, cart.Total);
         }
-        
+
+        [Fact]
+        public void CartCalculatesDiscount()
+        {
+            var cart = new Cart(PromotionEngineTestData.unitPrices);
+            var testItems = new List<string> { "A", "A", "A", "B", "C" };
+            cart.AddItems(testItems);
+            var expectedDiscount = 130;
+            Assert.Equal(expectedDiscount, cart.Discount);
+        }
+
+        [Fact]
+        public void CartAppliesDiscountToTotal()
+        {
+            var cart = new Cart(PromotionEngineTestData.unitPrices);
+            var testItems = new List<string> { "A", "A", "A", "B", "C" };
+            cart.AddItems(testItems);
+            var expectedTotal = 130 + PromotionEngineTestData.unitPrices["B"] + PromotionEngineTestData.unitPrices["C"]; ; 
+            Assert.Equal(expectedTotal, cart.Total);
+        }
+
     }
 }
