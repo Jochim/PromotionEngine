@@ -68,7 +68,7 @@ namespace PromotionEngineTests
             var cart = new Cart(PromotionEngineTestData.unitPrices, PromotionEngineTestData.promotionEngine);
             var testItems = new List<string> { "A", "A", "A", "B", "C" };
             cart.AddItems(testItems);
-            var expectedDiscount = 130;
+            var expectedDiscount = PromotionEngineTestData.unitPrices["A"] * 3 - 130;
             Assert.Equal(expectedDiscount, cart.Discount);
         }
 

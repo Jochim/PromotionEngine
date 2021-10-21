@@ -14,7 +14,7 @@ namespace PromotionEngine
 
         public decimal Total => SubTotal - Discount;
         public decimal SubTotal => _skus.Sum(sku => _unitPrices[sku]);
-        public decimal Discount { get; private set; }
+        public decimal Discount { get => _engine?.CalculateDiscount(_skus) ?? 0; }
 
         // We can have a cart without having any promotions
         public Cart(Dictionary<string, decimal> unitPrices) => _unitPrices = unitPrices;
@@ -39,11 +39,5 @@ namespace PromotionEngine
         {
             _skus = new();
         }
-
-        public void ApplyPromotions()
-        {
-            Discount = _engine?.CalculateDiscount(_skus) ?? 0;
-        }
-
     }
 }
