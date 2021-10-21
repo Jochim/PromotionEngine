@@ -1,3 +1,4 @@
+using PromotionEngine;
 using System.Collections.Generic;
 using Xunit;
 
