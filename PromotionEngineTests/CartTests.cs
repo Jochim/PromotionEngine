@@ -12,7 +12,7 @@ namespace PromotionEngineTests
         [Fact]
         public void CanAddItemsToCart()
         {
-            var cart = new Cart();
+            var cart = new Cart(unitPrices);
             var testItems = new List<string> { "A", "B", "C" };
             cart.AddItems(testItems);
             Assert.Equal(cart.GetItems(), testItems);
@@ -21,7 +21,7 @@ namespace PromotionEngineTests
         [Fact]
         public void CanAddDuplicateItemsToCast()
         {
-            var cart = new Cart();
+            var cart = new Cart(unitPrices);
             var testItems = new List<string> { "A", "A", "B", "C" };
             cart.AddItems(testItems);
             Assert.Equal(cart.GetItems(), testItems);
@@ -30,7 +30,7 @@ namespace PromotionEngineTests
         [Fact]
         public void CanClearCart()
         {
-            var cart = new Cart();
+            var cart = new Cart(unitPrices);
             var testItems = new List<string> { "A", "B", "C" };
             cart.AddItems(testItems);
             Assert.Equal(cart.GetItems(), testItems);
@@ -51,8 +51,7 @@ namespace PromotionEngineTests
             var cart = new Cart(unitPrices);
             var testItems = new List<string> { "A", "B", "C" };
             cart.AddItems(testItems);            
-            cart.ClearCart();
-            
+            cart.ClearCart();            
             Assert.Equal(0, cart.Total);
         }
 
@@ -61,8 +60,7 @@ namespace PromotionEngineTests
         {
             var cart = new Cart(unitPrices);
             var testItems = new List<string> { "A", "B", "C" };
-            cart.AddItems(testItems);
-            cart.ClearCart();
+            cart.AddItems(testItems);            
             var expectedTotal = unitPrices["A"] + unitPrices["B"] + unitPrices["C"];
             Assert.Equal(expectedTotal, cart.Total);
         }

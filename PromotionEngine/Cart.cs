@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace PromotionEngine
 {
@@ -9,6 +9,11 @@ namespace PromotionEngine
     public class Cart
     {
         private List<string> _skus = new();
+        private readonly Dictionary<string, decimal> _unitPrices = new();
+
+        public decimal Total => _skus.Sum(sku => _unitPrices[sku]);
+        
+        public Cart(Dictionary<string, decimal> unitPrices) => _unitPrices = unitPrices;         
 
         public void AddItems(List<string> skus)
         {
