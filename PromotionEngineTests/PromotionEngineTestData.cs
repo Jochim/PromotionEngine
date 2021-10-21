@@ -16,16 +16,26 @@ namespace PromotionEngineTests
                     var promotionOccurrences = Math.Floor(skus.Count(sku => sku == "A") / 3m);
                     var totalValue = unitPrices["A"] * 3 * promotionOccurrences;
                     var totalPromotionValue = 130 * promotionOccurrences;
-                    return totalValue-totalPromotionValue;
+                    return totalValue - totalPromotionValue;
                     },
                 unitPrices),
 
             ["BB"] = new PromotionRule(promotionCondition: skus => skus.Count(sku => sku == "B") >= 2,
-                promotionDiscount: (skus, unitPrices) => 45 * Math.Floor(skus.Count(sku => sku == "B") / 2m),
+                promotionDiscount: (skus, unitPrices) => {
+                    var promotionOccurrences = Math.Floor(skus.Count(sku => sku == "B") / 2m);
+                    var totalValue = unitPrices["B"] * 2 * promotionOccurrences;
+                    var totalPromotionValue = 45 * promotionOccurrences;
+                    return totalValue - totalPromotionValue;
+                },
                 unitPrices),
 
             ["CD"] = new PromotionRule(promotionCondition: skus => skus.Any(sku => sku == "C") && skus.Any(sku => sku == "D"),
-                promotionDiscount: (skus, unitPrices) => 30 * Math.Min(skus.Count(sku => sku == "C"), skus.Count(sku => sku == "D")),
+                promotionDiscount: (skus, unitPrices) => {
+                    var promotionOccurrences = Math.Min(skus.Count(sku => sku == "C"), skus.Count(sku => sku == "D"));
+                    var totalValue = (unitPrices["C"] + unitPrices["D"]) * promotionOccurrences;
+                    var totalPromotionValue = 30 * promotionOccurrences;
+                    return totalValue - totalPromotionValue;
+                    },
                 unitPrices)
         };
 
