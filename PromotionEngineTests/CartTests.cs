@@ -14,5 +14,14 @@ namespace PromotionEngineTests
             cart.AddItems(testItems);
             Assert.Equal(cart.GetItems(), testItems);
         }
+
+        [Fact]
+        public void CanAddDuplicateItemsToCast()
+        {
+            var cart = new Cart();
+            var testItems = new List<string> { "A", "A", "B", "C" };
+            cart.AddItems(testItems);
+            Assert.Equal(cart.GetItems(), testItems);
+        }
     }
 }
