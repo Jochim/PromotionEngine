@@ -3,10 +3,10 @@ using System.Linq;
 
 namespace PromotionEngine
 {
-    public class PromotionEngine : IPromotionEngine
+    public class PromotionsEngine : IPromotionEngine
     {
         private readonly List<IPromotionRule> _promotionRules;
-        public PromotionEngine(List<IPromotionRule> promotionRules)
+        public PromotionsEngine(List<IPromotionRule> promotionRules)
         {
             _promotionRules = promotionRules ?? new List<IPromotionRule>();
         }
