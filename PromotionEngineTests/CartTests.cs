@@ -4,15 +4,12 @@ using Xunit;
 
 namespace PromotionEngineTests
 {
-    public class CartTests
-    {
-        //Sku unit prices.
-        private static readonly Dictionary<string, decimal> unitPrices = new() { ["A"] = 50, ["B"] = 30, ["C"] = 20, ["D"] = 15 };
+    public class CartTests {           
 
         [Fact]
         public void CanAddItemsToCart()
         {
-            var cart = new Cart(unitPrices);
+            var cart = new Cart(PromotionEngineTestData.unitPrices);
             var testItems = new List<string> { "A", "B", "C" };
             cart.AddItems(testItems);
             Assert.Equal(cart.GetItems(), testItems);
@@ -21,7 +18,7 @@ namespace PromotionEngineTests
         [Fact]
         public void CanAddDuplicateItemsToCast()
         {
-            var cart = new Cart(unitPrices);
+            var cart = new Cart(PromotionEngineTestData.unitPrices);
             var testItems = new List<string> { "A", "A", "B", "C" };
             cart.AddItems(testItems);
             Assert.Equal(cart.GetItems(), testItems);
@@ -30,7 +27,7 @@ namespace PromotionEngineTests
         [Fact]
         public void CanClearCart()
         {
-            var cart = new Cart(unitPrices);
+            var cart = new Cart(PromotionEngineTestData.unitPrices);
             var testItems = new List<string> { "A", "B", "C" };
             cart.AddItems(testItems);
             Assert.Equal(cart.GetItems(), testItems);
@@ -41,14 +38,14 @@ namespace PromotionEngineTests
         [Fact]
         public void CartCalculatesTotalWhenEmpty()
         {
-            var cart = new Cart(unitPrices);
+            var cart = new Cart(PromotionEngineTestData.unitPrices);
             Assert.Equal(0, cart.Total);
         }
 
         [Fact]
         public void CartCalculatesTotalWhenEmptied()
         {
-            var cart = new Cart(unitPrices);
+            var cart = new Cart(PromotionEngineTestData.unitPrices);
             var testItems = new List<string> { "A", "B", "C" };
             cart.AddItems(testItems);            
             cart.ClearCart();            
@@ -58,10 +55,10 @@ namespace PromotionEngineTests
         [Fact]
         public void CartCalculatesTotal()
         {
-            var cart = new Cart(unitPrices);
+            var cart = new Cart(PromotionEngineTestData.unitPrices);
             var testItems = new List<string> { "A", "B", "C" };
             cart.AddItems(testItems);            
-            var expectedTotal = unitPrices["A"] + unitPrices["B"] + unitPrices["C"];
+            var expectedTotal = PromotionEngineTestData.unitPrices["A"] + PromotionEngineTestData.unitPrices["B"] + PromotionEngineTestData.unitPrices["C"];
             Assert.Equal(expectedTotal, cart.Total);
         }
         
