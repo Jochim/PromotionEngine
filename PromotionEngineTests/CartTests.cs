@@ -65,7 +65,7 @@ namespace PromotionEngineTests
         [Fact]
         public void CartCalculatesDiscount()
         {
-            var cart = new Cart(PromotionEngineTestData.unitPrices);
+            var cart = new Cart(PromotionEngineTestData.unitPrices, PromotionEngineTestData.promotionEngine);
             var testItems = new List<string> { "A", "A", "A", "B", "C" };
             cart.AddItems(testItems);
             var expectedDiscount = 130;
@@ -75,10 +75,10 @@ namespace PromotionEngineTests
         [Fact]
         public void CartAppliesDiscountToTotal()
         {
-            var cart = new Cart(PromotionEngineTestData.unitPrices);
+            var cart = new Cart(PromotionEngineTestData.unitPrices, PromotionEngineTestData.promotionEngine);
             var testItems = new List<string> { "A", "A", "A", "B", "C" };
             cart.AddItems(testItems);
-            var expectedTotal = 130 + PromotionEngineTestData.unitPrices["B"] + PromotionEngineTestData.unitPrices["C"]; ; 
+            var expectedTotal = 130 + PromotionEngineTestData.unitPrices["B"] + PromotionEngineTestData.unitPrices["C"];
             Assert.Equal(expectedTotal, cart.Total);
         }
 

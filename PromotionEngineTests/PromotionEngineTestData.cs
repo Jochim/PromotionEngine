@@ -20,6 +20,8 @@ namespace PromotionEngineTests
             ["CD"] = new PromotionRule(promotionCondition: skus => skus.Any(sku => sku == "C") && skus.Any(sku => sku == "D"),
                 promotionDiscount: skus => 30 * Math.Min(skus.Count(sku => sku == "C"), skus.Count(sku => sku == "D")))
         };
+
+        public static readonly IPromotionEngine promotionEngine = new PromotionsEngine(promotionRules.Values.ToList());
         
     }
 }
