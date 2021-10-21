@@ -23,5 +23,16 @@ namespace PromotionEngineTests
             cart.AddItems(testItems);
             Assert.Equal(cart.GetItems(), testItems);
         }
+
+        [Fact]
+        public void CanClearCart()
+        {
+            var cart = new Cart();
+            var testItems = new List<string> { "A", "B", "C" };
+            cart.AddItems(testItems);
+            Assert.Equal(cart.GetItems(), testItems);
+            cart.ClearCart();
+            Assert.Empty(cart.GetItems());
+        }
     }
 }
